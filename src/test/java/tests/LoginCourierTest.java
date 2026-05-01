@@ -21,7 +21,6 @@ public class LoginCourierTest {
 
     @BeforeClass
     public static void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
         courierApi = new CourierApi();
         Courier courier = new Courier(login, password, firstName);
         courierApi.sendPostRequestToCreateCourier(courier);

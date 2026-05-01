@@ -14,6 +14,7 @@ public class OrderApi {
     @Step("Отправка POST запроса на ручку /api/v1/orders")
     public Response sendPostRequestToCreateOrder(Order order) {
         return RestAssured.given()
+                .spec(ApiSpec.getRequestSpec())
                 .header("Content-type", "application/json")
                 .and()
                 .body(order)
@@ -24,6 +25,7 @@ public class OrderApi {
     @Step("Отправка GET запроса на ручку /api/v1/orders")
     public Response sendGetRequestToGetOrders() {
         return RestAssured.given()
+                .spec(ApiSpec.getRequestSpec())
                 .when()
                 .get("/api/v1/orders");
     }
@@ -31,6 +33,7 @@ public class OrderApi {
     @Step("Отправка PUT запроса на ручку /api/v1/orders/cancel")
     public void cancelOrder(int track) {
         RestAssured.given()
+                .spec(ApiSpec.getRequestSpec())
                 .header("Content-type", "application/json")
                 .and()
                 .body("{\"track\": \"" + String.valueOf(track) + "\"}")

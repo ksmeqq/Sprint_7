@@ -21,7 +21,6 @@ public class CreateCourierTest {
 
     @Before
     public void setup() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
         courierApi = new CourierApi();
     }
 

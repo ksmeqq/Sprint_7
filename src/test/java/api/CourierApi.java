@@ -13,6 +13,7 @@ public class CourierApi {
     @Step("Отправка POST запроса на ручку /api/v1/courier с телом запроса")
     public Response sendPostRequestToCreateCourier(Courier courier) {
         return RestAssured.given()
+                .spec(ApiSpec.getRequestSpec())
                 .header("Content-type", "application/json")
                 .and()
                 .body(courier)
@@ -23,6 +24,7 @@ public class CourierApi {
     @Step("Отправка POST запроса на ручку /api/v1/courier с query-параметрами")
     public Response sendPostRequestToCreateCourierWithQueryParams() {
         return RestAssured.given()
+                .spec(ApiSpec.getRequestSpec())
                 .queryParam("login", "ksme")
                 .queryParam("password", "1104")
                 .queryParam("firstName", "gleb")
@@ -33,6 +35,7 @@ public class CourierApi {
     @Step("Отправка POST запроса на ручку /api/v1/courier/login")
     public Response sendPostRequestToLoginCourier(Courier courier) {
         return RestAssured.given()
+                .spec(ApiSpec.getRequestSpec())
                 .header("Content-type", "application/json")
                 .and()
                 .body(courier)
@@ -44,7 +47,10 @@ public class CourierApi {
     public void deleteCourier(Response loginResponse) {
         if (loginResponse.getStatusCode() == 200) {
             int id = loginResponse.path("id");
-            RestAssured.delete("/api/v1/courier/" + id);
+            RestAssured.given()
+                    .spec(ApiSpec.getRequestSpec())
+                    .when()
+                    .delete("/api/v1/courier/" + id);
         }
     }
 
