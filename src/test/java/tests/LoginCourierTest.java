@@ -46,6 +46,7 @@ public class LoginCourierTest {
         courier.setPassword(password);
         Response response = courierApi.sendPostRequestToLoginCourier(courier);
         courierApi.compareStatusCode(response, HttpStatus.SC_NOT_FOUND);
+        courierApi.compareResponseBody(response, "message", "Учетная запись не найдена");
     }
 
     @Test
@@ -57,6 +58,7 @@ public class LoginCourierTest {
         courier.setPassword("1234");
         Response response = courierApi.sendPostRequestToLoginCourier(courier);
         courierApi.compareStatusCode(response, HttpStatus.SC_NOT_FOUND);
+        courierApi.compareResponseBody(response, "message", "Учетная запись не найдена");
     }
 
     @Test
@@ -67,6 +69,7 @@ public class LoginCourierTest {
         courier.setLogin(login);
         Response response = courierApi.sendPostRequestToLoginCourier(courier);
         courierApi.compareStatusCode(response, HttpStatus.SC_BAD_REQUEST);
+        courierApi.compareResponseBody(response, "message", "Недостаточно данных для входа");
     }
 
     @Test
@@ -77,6 +80,7 @@ public class LoginCourierTest {
         courier.setPassword(password);
         Response response = courierApi.sendPostRequestToLoginCourier(courier);
         courierApi.compareStatusCode(response, HttpStatus.SC_BAD_REQUEST);
+        courierApi.compareResponseBody(response, "message", "Недостаточно данных для входа");
     }
 
     @Test
